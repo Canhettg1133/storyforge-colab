@@ -6,6 +6,10 @@ Mẫu công khai chỉ chứa notebook, manifest và hướng dẫn. Backend v�
 Quyền đọc mẫu không cấp quyền dùng StoryForge và không cấp quyền sửa nguồn GitHub.
 Nút Mở Colab trong StoryForge được operator ghim vào commit đã kiểm tra.
 
+Cập nhật01/11: sửa kiểm tra giới hạn đầu ra của llama.cpp b11981. Khi `/props` báo
+`n_predict=-1`, notebook đối chiếu lệnh tiến trình thật thay vì kết luận nhầm cấu hình sai.
+Vẫn kiểm file/context, giới hạn gateway và đầy đủ model/API/HTTPS trước khi báo sẵn sàng.
+
 1. Đăng nhập StoryForge → Cài đặt → Máy AI cá nhân → Kết nối máy AI → Mở Colab.
 2. Chọn Ghép nối / khởi động, bấm Chạy và nhập mã notebook hiện ra vào StoryForge.
 3. Đọc đúng tài khoản và phiên notebook, bấm **Liên kết và dùng máy này**.

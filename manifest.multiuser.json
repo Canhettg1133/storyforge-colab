@@ -5,7 +5,7 @@
   },
   "runtime.py": {
     "source": "runtime.py",
-    "sha256": "a5ce6bed7feff54e55192a98fa0c907cda019ef8dcd5a699ad42fd7d9bb7ecfd"
+    "sha256": "84bbfdd4be761851b4ae735306d4f7f4730eb87d720c560bd445bc7fbd209561"
   },
   "connection.py": {
     "source": "connection.py",
@@ -29,7 +29,7 @@
   },
   "start_colab.py": {
     "source": "start_colab.py",
-    "sha256": "f6908f55846091496a87924c737f767ca8d4836f2d38f4c066ad83be95b88443"
+    "sha256": "61d7fcd0a6f211056a3ffe90d274c035fcba303f8feb2bebe115b71bf7ccbe8c"
   },
   "requirements.txt": {
     "source": "requirements.multiuser.txt",
