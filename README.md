@@ -1,39 +1,48 @@
 # Máy AI cá nhân StoryForge
 
-[Mở notebook trong Colab](https://colab.research.google.com/github/Canhettg1133/storyforge-colab/blob/main/StoryForge-Personal-AI.ipynb)
+[Mở mẫu Colab](https://colab.research.google.com/github/Canhettg1133/storyforge-colab/blob/main/StoryForge-Personal-AI.ipynb)
 
-Đây là mẫu công khai có sẵn mã và biểu mẫu cho **Máy AI cá nhân**. Backend hiện chỉ mở cho nhóm pilot được cho phép; đọc được mẫu không tự cấp quyền dùng StoryForge.
+Mẫu công khai chỉ chứa notebook, manifest và hướng dẫn. Backend vẫn chỉ mở cho nhóm pilot được cho phép.
+Quyền đọc mẫu không cấp quyền dùng StoryForge và không cấp quyền sửa nguồn GitHub.
+Nút Mở Colab trong StoryForge được operator ghim vào commit đã kiểm tra.
 
-1. Đăng nhập StoryForge → **Cài đặt → Máy AI cá nhân → Kết nối máy AI → Mở Colab**.
-2. Trong Colab chọn **Ghép nối / khởi động**, bấm **Chạy**.
-3. Nhập mã vào StoryForge, kiểm tra đúng tài khoản và phiên máy rồi **Xác nhận liên kết**.
-4. Chờ máy báo sẵn sàng → **Dùng máy này → Thử kết nối**. Giữ Colab hoạt động khi dùng AI.
+1. Đăng nhập StoryForge → Cài đặt → Máy AI cá nhân → Kết nối máy AI → Mở Colab.
+2. Chọn Ghép nối / khởi động, bấm Chạy và nhập mã notebook hiện ra vào StoryForge.
+3. Đọc đúng tài khoản và phiên notebook, bấm **Liên kết và dùng máy này**.
+4. Chờ máy sẵn sàng. Giao diện mới tự chọn đúng máy vừa liên kết khi không có lượt sinh hoặc Auto Write.
+5. **Thử kết nối** là thao tác chủ động để kiểm tra Direct; heartbeat/ready không thay thế phép thử đó.
+   Nếu tự chọn thất bại, bấm **Dùng máy này** để thử lại. Giao diện cũ vẫn cần Xác nhận rồi Dùng máy này;
+   notebook không tự nâng cấp website.
 
-Không cần xin quyền notebook Drive, tự chép mã, tạo Colab Secrets, nhập connector token hay tạo tài khoản Cloudflare. Không chia sẻ mã liên kết hoặc runtime.
+Không cần xin quyền Drive, Colab Secrets, chép key hoặc tự cấu hình tunnel. Lưu bản sao vào Drive là tùy chọn.
+Mỗi người cần runtime và liên kết riêng. Không chia sẻ mã, output hoặc runtime.
+Phiên mới không kế thừa RAM, model đã nạp hoặc credential của phiên trước.
 
-## Mẫu và phiên riêng
-
-Mở từ GitHub không tự lưu file vào Drive. **Tệp → Lưu bản sao vào Drive** là tùy chọn để giữ chỉnh sửa, không bắt buộc mỗi ngày. Người không có quyền ghi vào kho không sửa được nguồn GitHub; họ có thể chỉnh phiên/bản sao riêng.
-
-Mỗi người dùng có runtime, liên kết, key và tunnel riêng. Mẫu không chứa output, lịch sử chạy, credential hoặc phiên của người khác. Credential phiên chỉ được nhận sau khi chủ tài khoản xác nhận mã hợp lệ trong StoryForge. Phiên runtime mới không mang theo model đã tải, RAM, tiến trình hay credential phiên cũ.
-
-Colab không đảm bảo luôn có GPU, chạy 24/7 hoặc không ngắt. Tham khảo [FAQ Colab](https://research.google.com/colaboratory/faq.html) về tài nguyên và giới hạn dùng giao diện web ngoài notebook. Không đổi tài khoản để vượt hạn mức.
-
-## Mặc định
-
-| Mục | Giá trị |
+| Mục | Mặc định |
 | --- | --- |
 | Model | GGUF khác |
 | Repo | HauhauCS/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive |
-| File | Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q2_K_P.gguf |
-| Context / max output | 64000 / 32000 |
+| File | Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q8_K_P.gguf |
+| Context tổng | 128000 |
+| Đầu ra tối đa | 64000 |
 | Thiết bị | Tự động |
 | Model ID API | storyforge-local |
 
-64000/32000 là giới hạn cấu hình, không phải bằng chứng đã inference đủ độ dài đó. Tốc độ và khả năng nạp model tùy bộ nhớ và runtime thực tế.
+Context gồm đầu vào, lịch sử, hướng dẫn và đầu ra. 64000 là giới hạn, không bắt mọi câu trả lời sinh đủ số đó.
+File Q8 khoảng 8,13 GB không chứng minh GPU đủ bộ nhớ. Chưa nghiệm thu nạp Q8/128000/64000 hoặc suy luận
+đủ độ dài trên Colab thật. Không dùng câu thử ngắn để suy ra khả năng chạy gần giới hạn. Notebook không tự hạ cấu hình.
 
-## Nguồn và cập nhật
+Chạy lại cùng cấu hình dùng lại máy đã kiểm tra. Cấu hình sai/tải lỗi hoặc model bận giữ máy cũ nếu còn hoạt động.
+Đổi model dùng khóa chung với lượt sinh, dừng model cũ trước khi nạp model mới. Không đổi pairing/key/hostname/tunnel.
+Notebook hiển thị tên GGUF và giới hạn đã kiểm tra qua llama.cpp, tách cấu hình yêu cầu chưa áp dụng.
+Nếu nạp mới thất bại sau khi chuyển, chọn **Khôi phục cấu hình trước** để thử nạp lại; không bảo đảm khôi phục luôn thành công.
+Khi nâng từ mã gateway cũ trong cùng kernel, cần chủ động dừng máy chủ trước khi chạy mã mới; không tự cắt lượt đang sinh.
 
-Notebook được tạo bằng builder nhiều người dùng của StoryForge. ZIP/base64 trong ô mã chỉ để đóng gói mã Python và requirements, không phải mã hóa bí mật. `manifest.multiuser.json` ghi tên nguồn và SHA-256 của toàn bộ 9 tệp đóng gói, để đối chiếu với nguồn chuẩn trước phát hành.
+Ready gửi sớm qua heartbeat đã xác thực sau kiểm tra model/gateway/tunnel. Heartbeat định kỳ 60 giây,
+lease tối đa 120 giây, phiên tối đa 8 giờ. Lỗi đồng bộ có retry hữu hạn, không tạo credential mới.
+Key/control/connector chỉ ở bộ nhớ runtime và môi trường tiến trình; file lease không chứa secret.
+Thu hồi hoặc hết lease chặn gateway/stream. Runtime có thể sửa code nên ready vẫn chỉ là máy tự báo.
 
-Kho này chỉ phát hành notebook và manifest; không chứa dự án StoryForge riêng tư. Liên kết ở đầu README theo nhánh `main`; nút trong StoryForge được ghim commit đã kiểm tra. Khi cập nhật: sinh lại từ nguồn chuẩn, kiểm tra manifest/payload/output/bí mật và test, commit bộ ba tệp này, thử URL Colab ghim commit mới rồi cập nhật duy nhất `PERSONAL_AI_NOTEBOOK_URL` của backend pilot. Giữ URL phiên trước để rollback, không thay notebook cá nhân hoặc hostname cá nhân.
+Notebook được sinh từ nguồn chuẩn, output rỗng, execution count null; manifest chứa SHA-256 của từng tệp payload.
+ZIP/base64 chỉ đóng gói, không che giấu bí mật. Không sửa notebook cá nhân cũ hoặc hostname colab.storyforge.io.vn.
+Colab không bảo đảm GPU/thời lượng phiên. Xem [FAQ Colab](https://research.google.com/colaboratory/faq.html).
