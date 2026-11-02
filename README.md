@@ -35,6 +35,8 @@ Notebook đối chiếu `/props` về context mỗi slot, số slot và file; v�
 
 Gateway giới hạn đúng số slot đã chọn, thêm tối đa **5 yêu cầu chờ**, mỗi lượt chờ tối đa **60 giây**. Đầy cả hai phần trả HTTP429; hết thời gian chờ chưa gửi tới model cũng trả429. Mỗi lượt đang xử lý có giới hạn tổng30 phút, timeout mạng đọc600 giây. Không retry nội dung đã nhận dở.
 
+Khi ngắt streaming, thao tác đóng kết nối model được bảo vệ khỏi việc hủy của task group và có hạn5giây; slot được giải phóng sau bước dọn này. Đã kiểm thử cả thao tác đóng bất đồng bộ có chờ, không chỉ mock đóng tức thì.
+
 `dispatched` chỉ nghĩa đã chuyển tới llama.cpp; `streaming` nghĩa đã nhận dữ liệu luồng. Số slot có `is_processing=true` tại endpoint xác thực `/v1/runtime` mới là bằng chứng model đang xử lý. Ba xử lý + hai chờ không phải năm sinh đồng thời. Request ID riêng, hủy/disconnect/lỗi/hết lease giải phóng đúng lượt; không lưu prompt hoặc hàng đợi vào database.
 
 Đổi model/context/slot rồi chạy lại sẽ tải file trước, chỉ thay model khi không có lượt đang xử lý hoặc đang chờ. Nếu đang bận thì từ chối đổi rõ ràng và giữ máy cũ. Nếu nạp mới thất bại thì không báo đã áp dụng; có thể chủ động chọn **Khôi phục cấu hình trước** khi lease còn hiệu lực. Nạp lại có thể mất nhiều phút và nhiều GB.
