@@ -1,11 +1,11 @@
 {
   "gateway.py": {
     "source": "gateway.py",
-    "sha256": "e981301dc3ff3695beb992955e24e17141ce9f51f1465b0e60d305aa39cd41ed"
+    "sha256": "3b28fb1e70d016dfcc97c8d62dfca0cecc855043c168feec0133980b3138cfac"
   },
   "runtime.py": {
     "source": "runtime.py",
-    "sha256": "84bbfdd4be761851b4ae735306d4f7f4730eb87d720c560bd445bc7fbd209561"
+    "sha256": "b2eac483ef6c7fd98614b773421af862d1bb093597f5ea0b3fddb857dc31bd02"
   },
   "connection.py": {
     "source": "connection.py",
@@ -13,7 +13,7 @@
   },
   "settings.py": {
     "source": "settings.py",
-    "sha256": "7983417ca422e6bdedba5ecb5032cb03c0c03a3dc9a719a1c946fbd7835c9952"
+    "sha256": "4cb41909ccb1d34fd485627a273a0664b36c76769cb9be1ea38abf9ef48e9e3a"
   },
   "linked_connection.py": {
     "source": "linked_connection.py",
@@ -29,10 +29,14 @@
   },
   "start_colab.py": {
     "source": "start_colab.py",
-    "sha256": "61d7fcd0a6f211056a3ffe90d274c035fcba303f8feb2bebe115b71bf7ccbe8c"
+    "sha256": "093d12a19db28aac5cc3827b2a4475673310541d759129e8a466dbe87d38c4ce"
   },
   "requirements.txt": {
     "source": "requirements.multiuser.txt",
     "sha256": "667c295078382025419438d2da20b950665eb31a108b030eab704a7b88b82675"
+  },
+  "model_catalog.json": {
+    "source": "model_catalog.json",
+    "sha256": "46d16a0cc199732207bb5e52fdc9fad57c9b6f61d0b3c4dd2de8cd71b170fae4"
   }
 }

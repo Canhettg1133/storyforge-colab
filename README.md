@@ -1,52 +1,52 @@
-# Máy AI cá nhân StoryForge
+# Máy AI cá nhân StoryForge · Q/IQ và nhiều yêu cầu văn bản
 
-[Mở mẫu Colab](https://colab.research.google.com/github/Canhettg1133/storyforge-colab/blob/main/StoryForge-Personal-AI.ipynb)
+Mẫu Colab công khai, không cần chép code hoặc nhập key. Mở **StoryForge → Cài đặt → Máy AI cá nhân → Mở Colab** để nhận URL ghim đúng phiên bản. Mở mẫu chưa tự tải model. Có thể lưu bản sao vào Drive nếu muốn giữ chỉnh sửa; mỗi người cần runtime và liên kết riêng.
 
-Mẫu công khai chỉ chứa notebook, manifest và hướng dẫn. Backend vẫn chỉ mở cho nhóm pilot được cho phép.
-Quyền đọc mẫu không cấp quyền dùng StoryForge và không cấp quyền sửa nguồn GitHub.
-Nút Mở Colab trong StoryForge được operator ghim vào commit đã kiểm tra.
+Trong biểu mẫu, chọn model, thiết bị và **số yêu cầu đồng thời: 1, 3 hoặc 5**. Sau đó chủ động chạy **Ghép nối / khởi động**, nhập mã vào StoryForge và xác nhận theo luồng hiện có. Không chia sẻ runtime hoặc output phiên liên kết.
 
-Cập nhật01/11: sửa kiểm tra giới hạn đầu ra của llama.cpp b11981. Khi `/props` báo
-`n_predict=-1`, notebook đối chiếu lệnh tiến trình thật thay vì kết luận nhầm cấu hình sai.
-Vẫn kiểm file/context, giới hạn gateway và đầy đủ model/API/HTTPS trước khi báo sẵn sàng.
+Mặc định: **Q8_K_P**, **128000 context mỗi yêu cầu**, **64000 output tối đa**, **Tự động**, API model **storyforge-local**, **3 slot**. Không tự giảm model, token hoặc slot khi thiếu bộ nhớ. **5 slot là cấu hình thử nghiệm**, chưa được benchmark trên GPU thật.
 
-1. Đăng nhập StoryForge → Cài đặt → Máy AI cá nhân → Kết nối máy AI → Mở Colab.
-2. Chọn Ghép nối / khởi động, bấm Chạy và nhập mã notebook hiện ra vào StoryForge.
-3. Đọc đúng tài khoản và phiên notebook, bấm **Liên kết và dùng máy này**.
-4. Chờ máy sẵn sàng. Giao diện mới tự chọn đúng máy vừa liên kết khi không có lượt sinh hoặc Auto Write.
-5. **Thử kết nối** là thao tác chủ động để kiểm tra Direct; heartbeat/ready không thay thế phép thử đó.
-   Nếu tự chọn thất bại, bấm **Dùng máy này** để thử lại. Giao diện cũ vẫn cần Xác nhận rồi Dùng máy này;
-   notebook không tự nâng cấp website.
+## Danh sách đã xác minh ngày 02/11/2026
 
-Không cần xin quyền Drive, Colab Secrets, chép key hoặc tự cấu hình tunnel. Lưu bản sao vào Drive là tùy chọn.
-Mỗi người cần runtime và liên kết riêng. Không chia sẻ mã, output hoặc runtime.
-Phiên mới không kế thừa RAM, model đã nạp hoặc credential của phiên trước.
+Nguồn: [Hugging Face](https://huggingface.co/HauhauCS/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive/tree/45b6a334b4bcd1d7f37179df58b3b1d66a184e5d).
+Tất cả lựa chọn Q/IQ ghim revision `45b6a334b4bcd1d7f37179df58b3b1d66a184e5d`; tên file chính xác và dung lượng được đóng gói trong `model_catalog.json` bên trong notebook. Không có mmproj trong danh sách sinh văn bản. Chọn **GGUF khác** để nhập repo, file và revision riêng; ba trường này chỉ áp dụng cho lựa chọn đó.
 
-| Mục | Mặc định |
-| --- | --- |
-| Model | GGUF khác |
-| Repo | HauhauCS/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive |
-| File | Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q8_K_P.gguf |
-| Context tổng | 128000 |
-| Đầu ra tối đa | 64000 |
-| Thiết bị | Tự động |
-| Model ID API | storyforge-local |
+| Bản | Dung lượng file (GB thập phân) |
+| --- | ---: |
+| Q2_K_P | 4.432 |
+| IQ3_M | 4.715 |
+| Q3_K_M | 4.850 |
+| Q3_K_P | 4.885 |
+| IQ4_XS | 5.071 |
+| Q4_K_M | 5.335 |
+| Q4_K_P | 5.369 |
+| Q5_K_M | 5.763 |
+| Q5_K_P | 5.813 |
+| Q6_K_P | 6.250 |
+| Q8_K_P | 8.133 |
 
-Context gồm đầu vào, lịch sử, hướng dẫn và đầu ra. 64000 là giới hạn, không bắt mọi câu trả lời sinh đủ số đó.
-File Q8 khoảng 8,13 GB không chứng minh GPU đủ bộ nhớ. Chưa nghiệm thu nạp Q8/128000/64000 hoặc suy luận
-đủ độ dài trên Colab thật. Không dùng câu thử ngắn để suy ra khả năng chạy gần giới hạn. Notebook không tự hạ cấu hình.
+Dung lượng file không phải tổng RAM/VRAM cần dùng.
 
-Chạy lại cùng cấu hình dùng lại máy đã kiểm tra. Cấu hình sai/tải lỗi hoặc model bận giữ máy cũ nếu còn hoạt động.
-Đổi model dùng khóa chung với lượt sinh, dừng model cũ trước khi nạp model mới. Không đổi pairing/key/hostname/tunnel.
-Notebook hiển thị tên GGUF và giới hạn đã kiểm tra qua llama.cpp, tách cấu hình yêu cầu chưa áp dụng.
-Nếu nạp mới thất bại sau khi chuyển, chọn **Khôi phục cấu hình trước** để thử nạp lại; không bảo đảm khôi phục luôn thành công.
-Khi nâng từ mã gateway cũ trong cùng kernel, cần chủ động dừng máy chủ trước khi chạy mã mới; không tự cắt lượt đang sinh.
+## Context và đồng thời
 
-Ready gửi sớm qua heartbeat đã xác thực sau kiểm tra model/gateway/tunnel. Heartbeat định kỳ 60 giây,
-lease tối đa 120 giây, phiên tối đa 8 giờ. Lỗi đồng bộ có retry hữu hạn, không tạo credential mới.
-Key/control/connector chỉ ở bộ nhớ runtime và môi trường tiến trình; file lease không chứa secret.
-Thu hồi hoặc hết lease chặn gateway/stream. Runtime có thể sửa code nên ready vẫn chỉ là máy tự báo.
+llama.cpp ghim `b11981`, continuous batching bật, pool KV tách theo slot. Tham số context tổng = context mỗi lượt × số slot: **128000 / 384000 / 640000** cho **1 / 3 / 5** slot. Context gồm template, hướng dẫn, lịch sử, input và output; input + output phải nằm trong context từng lượt. Trần output 64000 không có nghĩa mọi câu sẽ sinh đủ 64000; EOS vẫn hoạt động.
 
-Notebook được sinh từ nguồn chuẩn, output rỗng, execution count null; manifest chứa SHA-256 của từng tệp payload.
-ZIP/base64 chỉ đóng gói, không che giấu bí mật. Không sửa notebook cá nhân cũ hoặc hostname colab.storyforge.io.vn.
-Colab không bảo đảm GPU/thời lượng phiên. Xem [FAQ Colab](https://research.google.com/colaboratory/faq.html).
+Notebook đối chiếu `/props` về context mỗi slot, số slot và file; với `n_predict=-1` đặc thù b11981, kiểm tra lệnh tiến trình thật qua `/proc`. Nếu cấu hình thực nhận sai thì không báo sẵn sàng. Không âm thầm chia 128000 cho ba hoặc năm lượt.
+
+Gateway giới hạn đúng số slot đã chọn, thêm tối đa **5 yêu cầu chờ**, mỗi lượt chờ tối đa **60 giây**. Đầy cả hai phần trả HTTP429; hết thời gian chờ chưa gửi tới model cũng trả429. Mỗi lượt đang xử lý có giới hạn tổng30 phút, timeout mạng đọc600 giây. Không retry nội dung đã nhận dở.
+
+`dispatched` chỉ nghĩa đã chuyển tới llama.cpp; `streaming` nghĩa đã nhận dữ liệu luồng. Số slot có `is_processing=true` tại endpoint xác thực `/v1/runtime` mới là bằng chứng model đang xử lý. Ba xử lý + hai chờ không phải năm sinh đồng thời. Request ID riêng, hủy/disconnect/lỗi/hết lease giải phóng đúng lượt; không lưu prompt hoặc hàng đợi vào database.
+
+Đổi model/context/slot rồi chạy lại sẽ tải file trước, chỉ thay model khi không có lượt đang xử lý hoặc đang chờ. Nếu đang bận thì từ chối đổi rõ ràng và giữ máy cũ. Nếu nạp mới thất bại thì không báo đã áp dụng; có thể chủ động chọn **Khôi phục cấu hình trước** khi lease còn hiệu lực. Nạp lại có thể mất nhiều phút và nhiều GB.
+
+## Giới hạn kiểm chứng và an toàn
+
+Đã có kiểm thử tự động và thử Chromium qua client/gateway thật với inference mô phỏng. **Chưa có benchmark GPU thật của bản này**, chưa chứng minh Q8 +128000 mỗi slot +3/5 vừa T4, chưa thử hết context hoặc sinh đủ64000 token. Chẩn đoán cho xem VRAM hiện dùng/tổng và RAM khả dụng nếu đọc được, không in key hoặc log riêng tư. Lấy mẫu hiện tại không phải đỉnh bộ nhớ benchmark.
+
+Giữ nguyên xác thực, heartbeat, lease và thu hồi. Không cần Colab Secrets, token Google hoặc Cloudflare quản trị. Không gửi key/token vào chat hoặc URL. Notebook mới không tự cập nhật runtime cũ; chỉ chạy phiên mới khi chủ động quyết định. Notebook cá nhân cũ và hostname cá nhân độc lập.
+
+## Quay về
+
+- Tải thấp: chọn **1** slot rồi chủ động chạy lại khi máy rảnh; vẫn giữ Q8/128000/64000.
+- Bản trước: [Open in Colab e3c27d5](https://colab.research.google.com/github/Canhettg1133/storyforge-colab/blob/e3c27d5348be0708bab3fb341d5df8e9914ad1ab/StoryForge-Personal-AI.ipynb). Bản đó chỉ có một slot và chưa có danh sách11 lựa chọn.
+- Không sửa lịch sử hoặc force-push để rollback; StoryForge đổi URL ghim phiên bản ở backend nếu cần.
