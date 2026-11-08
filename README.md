@@ -1,5 +1,14 @@
 # Máy AI cá nhân StoryForge · Q/IQ và nhiều yêu cầu văn bản
 
+## Cập nhật 08/11/2026: xử lý tải file bị kẹt hoặc lỗi HTTP
+
+- Sau khi cài thư viện, notebook hiển thị riêng bước tải công cụ GPU/CPU từ GitHub. Khi lỗi, thông báo có tên file và mã HTTP; một số lỗi mạng tạm thời được thử tối đa ba lần. File tải dở không được coi là công cụ đã tải xong.
+- GGUF công khai được tải trong tiến trình riêng. Bấm Dừng sẽ dừng cả tiến trình tải và giải phóng khóa; trên Linux, lượt tải cũng thoát nếu tiến trình notebook bị dừng đột ngột.
+- Chờ khóa GGUF tối đa 60 giây, tổng thời gian một lượt tải tối đa 30 phút, có thông báo chờ mỗi 30 giây. Không tự xóa khóa/cache hoặc thay cấu hình model.
+- Nếu đã bị kẹt bằng bản cũ, khởi động lại phiên Colab bằng **Runtime → Restart session**, rồi mở mẫu mới và ghép nối lại. Tải lại trang hoặc kết nối lại đơn thuần không bảo đảm dừng lượt tải cũ. Khởi động lại phiên sẽ dừng máy AI hiện tại và mất quyền phiên trong bộ nhớ; cache còn hay không phụ thuộc máy ảo Colab.
+
+Đã qua **158 kiểm thử trên Linux**, bao gồm khóa file thật, dừng tiến trình, thoát theo phiên notebook và thư viện Hugging Face với máy chủ tải thử cục bộ. Chưa thử tải model nhiều GB hoặc inference GPU Colab thật cho bản sửa này.
+
 Mẫu Colab công khai, không cần chép code hoặc nhập key. Mở **StoryForge → Cài đặt → Máy AI cá nhân → Mở Colab** để nhận URL ghim đúng phiên bản. Mở mẫu chưa tự tải model. Có thể lưu bản sao vào Drive nếu muốn giữ chỉnh sửa; mỗi người cần runtime và liên kết riêng.
 
 Trong biểu mẫu, chọn model, thiết bị và **số yêu cầu đồng thời: 1, 3 hoặc 5**. Sau đó chủ động chạy **Ghép nối / khởi động**, nhập mã vào StoryForge và xác nhận theo luồng hiện có. Không chia sẻ runtime hoặc output phiên liên kết.
