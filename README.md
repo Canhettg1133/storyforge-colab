@@ -1,5 +1,34 @@
 # Máy AI cá nhân StoryForge · Q/IQ và nhiều yêu cầu văn bản
 
+## Bản riêng cho Dịch truyện: E2B Q4, mặc định 10 luồng
+
+[Mở bản E2B Q4 10 luồng trong Colab](https://colab.research.google.com/github/Canhettg1133/storyforge-colab/blob/codex/translator-e2b-q4-10/StoryForge-Translator-E2B-Q4-10.ipynb)
+· [Xem notebook](./StoryForge-Translator-E2B-Q4-10.ipynb)
+· [Phiên bản và checksum](./manifest.translator-e2b10.json).
+
+Bản riêng này dùng **Gemma E2B Q4_K_P**, revision
+`da8593c3e407afcd3e7da94ff2d69d77e2a28a48`, **llama.cpp b12413**,
+**10 slot**, context **24.000/slot**, output tối đa **12.000 token**.
+GPU sampling bật chỉ với đúng model/file/revision đã ghim trên GPU; MTP tắt.
+Giữ xác thực, lease, thu hồi, khóa đổi model và kiểm tra cấu hình trước khi
+báo sẵn sàng. Notebook Viết truyện `StoryForge-Personal-AI.ipynb` bên dưới
+và cấu hình mặc định của nó không bị thay đổi.
+
+Chọn **T4 GPU**, chạy ô **Kết nối Dịch truyện**, rồi nhập mã liên kết vào
+StoryForge và xác nhận đúng tài khoản/máy. Chờ máy sẵn sàng, quay về Dịch truyện
+để tải TXT và dịch. HTML riêng, ô nạp TXT và ô benchmark đều tùy chọn; không
+cần Run all. Khi đo, nạp ít nhất 30.000 ký tự vào `/content/truyen.txt`, giữ
+10 luồng / 3.000 ký tự / output 12.000 và dừng lượt dịch khác trước khi đo.
+
+Cấu hình runtime này đã được đo trên T4 thật: một lượt 10 request qua gateway
+đạt khoảng 293 token/s tổng, decode trung bình khoảng 33 token/s mỗi request.
+Đây là kết quả tham khảo, không phải cam kết tốc độ hoặc chứng nhận chất
+lượng dịch. Bản đóng gói thêm hướng dẫn và ô nạp TXT, chưa chạy lại GPU sau
+bước đóng gói; kiểm tra offline bằng `python -m unittest discover -s tests`.
+Không chia sẻ mã liên kết, output phiên hay credentials.
+
+Các mục bên dưới tiếp tục mô tả notebook Máy AI cá nhân/Viết truyện cũ.
+
 ## Cập nhật 08/11/2026: xử lý tải file bị kẹt hoặc lỗi HTTP
 
 - Sau khi cài thư viện, notebook hiển thị riêng bước tải công cụ GPU/CPU từ GitHub. Khi lỗi, thông báo có tên file và mã HTTP; một số lỗi mạng tạm thời được thử tối đa ba lần. File tải dở không được coi là công cụ đã tải xong.
