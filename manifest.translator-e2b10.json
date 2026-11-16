@@ -1,0 +1,40 @@
+{
+  "notebook": "StoryForge-Translator-E2B-Q4-10.ipynb",
+  "notebookSha256": "c824a2132083b1fe34e4c9a7925ca97d41d80402a2b90bfb7f37ba27d9dc4980",
+  "textHashNormalization": "CRLF to LF for notebook files only; embedded ZIP entries are hashed as raw bytes",
+  "writerNotebookSha256": "6afe7f3c826ce207d8a46f13c33352228d0f1e1c9f6903ef2d5aee2b5eec5746",
+  "model": {
+    "repo": "HauhauCS/Gemma-4-E2B-Uncensored-HauhauCS-Aggressive",
+    "revision": "da8593c3e407afcd3e7da94ff2d69d77e2a28a48",
+    "filename": "Gemma-4-E2B-Uncensored-HauhauCS-Aggressive-Q4_K_P.gguf",
+    "bytes": 3450277824,
+    "sha256": "aa866c1e514468f3d0f33971679d63c11b7c9c47acddd1cc5785fc467e52c21d"
+  },
+  "engine": {
+    "release": "b12413",
+    "commit": "dd099a6bf30c50627f6ae18915fbb687539a704d",
+    "channel": "nightly"
+  },
+  "defaults": {
+    "parallel": 10,
+    "context": 24000,
+    "max_output": 12000,
+    "gpu_sampling": true,
+    "mtp": false
+  },
+  "runtimeProfileMeasuredOnT4": true,
+  "publishedWrapperGpuRun": false,
+  "payloadSha256": {
+    "cloudflare_tunnel.py": "b7441d61f9c6c648e86c10f0732811feede648712316e2e9adcfff0d4ef3c765",
+    "connection.py": "3b2f1e116174ef1c036ba84840d5618bd91c5a86d930a5806ce00d1abebc1f54",
+    "gateway.py": "962b1c0cb1440136848118c71dbdf4aa9f9540b5963f422d5583e98024c062a7",
+    "gateway_translator.py": "14cb10c1a626b8638ff15c69b153cc94c85a8c5e136a6d3a453a89e61c88b263",
+    "linked_connection.py": "ec811106d84cdf5eb4e72aac839790f101d454078f44c89d8f6275ca1317814c",
+    "model_catalog.json": "1837883cc1bf2728a037d14ed0348046a0693983953a072a846725f7dd100e44",
+    "ngrok_tunnel.py": "5c1eca6befe640175e74ce58a110cae1e129237bd16011dcc794f9eb27496702",
+    "requirements.txt": "667c295078382025419438d2da20b950665eb31a108b030eab704a7b88b82675",
+    "runtime.py": "b2eac483ef6c7fd98614b773421af862d1bb093597f5ea0b3fddb857dc31bd02",
+    "settings.py": "6f7624b4c875cf4018404fdf01f75a2acfeb5a71bb55ffe1eb7f3ba71f54a24b",
+    "start_colab.py": "597fa139a234e8308cb5eb47720a041accae9cc9f86c9460fdda49cd9eb71f0b"
+  }
+}

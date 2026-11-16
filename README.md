@@ -1,5 +1,38 @@
 # Máy AI cá nhân StoryForge · Q/IQ và nhiều yêu cầu văn bản
 
+## Bản riêng cho Dịch truyện: E2B Q4, mặc định 10 luồng
+
+[Mở bản E2B Q4 10 luồng trong Colab](https://colab.research.google.com/github/Canhettg1133/storyforge-colab/blob/codex/translator-e2b-q4-10/StoryForge-Translator-E2B-Q4-10.ipynb)
+· [Xem notebook](./StoryForge-Translator-E2B-Q4-10.ipynb)
+· [Phiên bản và checksum](./manifest.translator-e2b10.json).
+
+Bản riêng này dùng **Gemma E2B Q4_K_P**, revision
+`da8593c3e407afcd3e7da94ff2d69d77e2a28a48`, **llama.cpp b12413**,
+**10 slot**, context **24.000/slot**, output tối đa **12.000 token**.
+GPU sampling bật chỉ với đúng model/file/revision đã ghim trên GPU; MTP tắt.
+Giữ xác thực, lease, thu hồi, khóa đổi model và kiểm tra cấu hình trước khi
+báo sẵn sàng. Notebook Viết truyện `StoryForge-Personal-AI.ipynb` bên dưới
+và cấu hình mặc định của nó không bị thay đổi.
+
+Chọn **T4 GPU**, chạy ô **Kết nối Dịch truyện**, bấm **Sao chép mã**, dán vào
+StoryForge và xác nhận đúng tài khoản/máy. Mã hiện lớn trên nền tím, nút sao
+chép có thông báo kết quả; nếu trình duyệt chặn clipboard, chọn mã và nhấn
+Ctrl+C (Mac: ⌘C). Chờ máy sẵn sàng, quay về Dịch truyện để tải TXT và dịch.
+Notebook chỉ còn hướng dẫn ngắn và ô kết nối, mặc định ẩn mã nguồn của ô.
+Thông tin kỹ thuật nằm trong mục đóng sẵn **Thông tin cấu hình và lưu ý**.
+Các ô HTML dịch riêng, nạp TXT và benchmark đã được bỏ khỏi bản dùng chính;
+các công cụ đo thử cũ không được chạy khi bấm Run all.
+
+Cấu hình runtime này đã được đo trên T4 thật: một lượt 10 request qua gateway
+đạt khoảng 293 token/s tổng, decode trung bình khoảng 33 token/s mỗi request.
+Đây là kết quả tham khảo, không phải cam kết tốc độ hoặc chứng nhận chất
+lượng dịch. Giao diện và clipboard được kiểm tra trên trình duyệt cục bộ,
+chưa chạy lại GPU hoặc xác minh clipboard trong phiên Colab đăng nhập sau
+bước đóng gói; kiểm tra offline bằng `python -m unittest discover -s tests`.
+Không chia sẻ mã liên kết, output phiên hay credentials.
+
+Các mục bên dưới tiếp tục mô tả notebook Máy AI cá nhân/Viết truyện cũ.
+
 ## Cập nhật 08/11/2026: xử lý tải file bị kẹt hoặc lỗi HTTP
 
 - Sau khi cài thư viện, notebook hiển thị riêng bước tải công cụ GPU/CPU từ GitHub. Khi lỗi, thông báo có tên file và mã HTTP; một số lỗi mạng tạm thời được thử tối đa ba lần. File tải dở không được coi là công cụ đã tải xong.
