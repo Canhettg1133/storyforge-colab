@@ -14,16 +14,20 @@ Giữ xác thực, lease, thu hồi, khóa đổi model và kiểm tra cấu hì
 báo sẵn sàng. Notebook Viết truyện `StoryForge-Personal-AI.ipynb` bên dưới
 và cấu hình mặc định của nó không bị thay đổi.
 
-Chọn **T4 GPU**, chạy ô **Kết nối Dịch truyện**, rồi nhập mã liên kết vào
-StoryForge và xác nhận đúng tài khoản/máy. Chờ máy sẵn sàng, quay về Dịch truyện
-để tải TXT và dịch. HTML riêng, ô nạp TXT và ô benchmark đều tùy chọn; không
-cần Run all. Khi đo, nạp ít nhất 30.000 ký tự vào `/content/truyen.txt`, giữ
-10 luồng / 3.000 ký tự / output 12.000 và dừng lượt dịch khác trước khi đo.
+Chọn **T4 GPU**, chạy ô **Kết nối Dịch truyện**, bấm **Sao chép mã**, dán vào
+StoryForge và xác nhận đúng tài khoản/máy. Mã hiện lớn trên nền tím, nút sao
+chép có thông báo kết quả; nếu trình duyệt chặn clipboard, chọn mã và nhấn
+Ctrl+C (Mac: ⌘C). Chờ máy sẵn sàng, quay về Dịch truyện để tải TXT và dịch.
+Notebook chỉ còn hướng dẫn ngắn và ô kết nối, mặc định ẩn mã nguồn của ô.
+Thông tin kỹ thuật nằm trong mục đóng sẵn **Thông tin cấu hình và lưu ý**.
+Các ô HTML dịch riêng, nạp TXT và benchmark đã được bỏ khỏi bản dùng chính;
+các công cụ đo thử cũ không được chạy khi bấm Run all.
 
 Cấu hình runtime này đã được đo trên T4 thật: một lượt 10 request qua gateway
 đạt khoảng 293 token/s tổng, decode trung bình khoảng 33 token/s mỗi request.
 Đây là kết quả tham khảo, không phải cam kết tốc độ hoặc chứng nhận chất
-lượng dịch. Bản đóng gói thêm hướng dẫn và ô nạp TXT, chưa chạy lại GPU sau
+lượng dịch. Giao diện và clipboard được kiểm tra trên trình duyệt cục bộ,
+chưa chạy lại GPU hoặc xác minh clipboard trong phiên Colab đăng nhập sau
 bước đóng gói; kiểm tra offline bằng `python -m unittest discover -s tests`.
 Không chia sẻ mã liên kết, output phiên hay credentials.
 

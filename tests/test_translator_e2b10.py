@@ -4,6 +4,7 @@ import base64
 import hashlib
 import io
 import json
+from html.parser import HTMLParser
 from pathlib import Path
 import tempfile
 import unittest
@@ -36,10 +37,15 @@ class TranslatorE2B10Tests(unittest.TestCase):
         self.assertEqual(hashlib.sha256((ROOT / 'StoryForge-Personal-AI.ipynb').read_bytes().replace(b'\r\n', b'\n')).hexdigest(),
                          self.manifest['writerNotebookSha256'])
 
-    def test_cells_are_unexecuted_and_compile_and_upload_precedes_measurement(self):
+    def test_main_notebook_only_contains_guide_and_connection(self):
         cells = self.notebook['cells']
         self.assertEqual([c['metadata']['id'] for c in cells],
-                         ['guide', 'control', 'story-html', 'source-upload', 'speed-benchmark'])
+                         ['guide', 'control'])
+        guide = ''.join(cells[0]['source'])
+        self.assertIn('<details>', guide)
+        self.assertNotIn('<details open', guide)
+        self.assertIn('<summary>', guide)
+        self.assertEqual(cells[1]['metadata']['cellView'], 'form')
         for cell in cells[1:]:
             self.assertFalse(cell['outputs'])
             self.assertIsNone(cell['execution_count'])
@@ -47,6 +53,32 @@ class TranslatorE2B10Tests(unittest.TestCase):
         for name, data in self.files.items():
             if name.endswith('.py'):
                 compile(data, name, 'exec')
+
+    def test_pairing_card_escapes_code_and_exposes_copy_and_feedback(self):
+        code = ''.join(self.notebook['cells'][1]['source'])
+        helper = next(n for n in ast.parse(code).body
+                      if isinstance(n, ast.FunctionDef) and n.name == '_sf_pairing_card')
+        namespace = {}
+        exec(compile(ast.Module(body=[helper], type_ignores=[]), 'pairing-card', 'exec'), namespace)
+        value = '\"><script>alert(1)</script>&'
+        markup = namespace['_sf_pairing_card'](value)
+        class Elements(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.elements = []
+            def handle_starttag(self, tag, attrs):
+                self.elements.append((tag, dict(attrs)))
+        parsed = Elements()
+        parsed.feed(markup)
+        field = next(attrs for tag, attrs in parsed.elements if tag == 'input')
+        button = next(attrs for tag, attrs in parsed.elements if tag == 'button')
+        self.assertEqual(field['value'], value)
+        self.assertIn('readonly', field)
+        self.assertFalse(any(tag == 'script' for tag, _ in parsed.elements))
+        self.assertNotIn(value, button['onclick'])
+        self.assertTrue(any(attrs.get('role') == 'status' for _, attrs in parsed.elements))
+        self.assertIn('Sao chép', markup)
+        self.assertIn("_sf_show_pairing_code(_sf_pair['code'])", code)
 
     def test_default_is_pinned_e2b_q4_ten_slots_and_gpu_sampling(self):
         with tempfile.TemporaryDirectory() as folder:
