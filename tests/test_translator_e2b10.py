@@ -54,6 +54,15 @@ class TranslatorE2B10Tests(unittest.TestCase):
             if name.endswith('.py'):
                 compile(data, name, 'exec')
 
+    def test_writer_notebook_collapses_long_guide_by_default(self):
+        writer = json.loads((ROOT / 'StoryForge-Personal-AI.ipynb').read_text(encoding='utf-8'))
+        self.assertEqual([cell['metadata']['id'] for cell in writer['cells']], ['guide', 'control'])
+        guide = ''.join(writer['cells'][0]['source'])
+        self.assertIn('<details>', guide)
+        self.assertNotIn('<details open', guide)
+        self.assertIn('Hướng dẫn chi tiết và xử lý sự cố · bấm để xem', guide)
+        self.assertEqual(writer['cells'][1]['metadata']['cellView'], 'form')
+
     def test_pairing_card_escapes_code_and_exposes_copy_and_feedback(self):
         code = ''.join(self.notebook['cells'][1]['source'])
         helper = next(n for n in ast.parse(code).body
