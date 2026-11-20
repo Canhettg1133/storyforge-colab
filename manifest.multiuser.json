@@ -13,7 +13,7 @@
   },
   "settings.py": {
     "source": "settings.py",
-    "sha256": "c206dfaca2973b482101cda0aff12ae99e1ef74af34b1cf99422efec3aa7f18f"
+    "sha256": "34b171f26a6cb1eeffc493488f9e17d30392e5f9e97838a835f2a45f157d724e"
   },
   "linked_connection.py": {
     "source": "linked_connection.py",
@@ -29,7 +29,7 @@
   },
   "start_colab.py": {
     "source": "start_colab.py",
-    "sha256": "519b1c468eb70c8a3bee7d336a9b18e74154c06a08afce2dc00dec7c518d49f3"
+    "sha256": "54e136f323f036169f2440dd1b473934732b00cb10c957a9d0dc0eba17619d6c"
   },
   "requirements.txt": {
     "source": "requirements.multiuser.txt",
